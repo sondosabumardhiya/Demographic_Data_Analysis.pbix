@@ -1,4 +1,4 @@
-# 📊 Comprehensive Demographic Data Analysis
+# 📊  Data Analysis
 ### *A Data Science & Visualization Project*
 
 ## 📝 Project Overview
