@@ -38,6 +38,36 @@ Below are the specific questions addressed in this analysis, along with the resu
 9. **India's Job Market**: Identify the most popular occupation for high earners (>50K) in India.
    * **Result**: **Prof-specialty**.
 
+## 🧮 Key DAX Measures
+To achieve these results, I developed several custom measures:
+
+* **Higher Education Rich %**:
+    ```dax
+    Higher Education Rich % = 
+    DIVIDE(
+        CALCULATE(COUNT('adult data'[salary]), 'adult data'[salary] = ">50K", 'adult data'[Education Level] = "Bachelors, Masters, or Doctorate"),
+        CALCULATE(COUNT('adult data'[salary]), 'adult data'[Education Level] = "Bachelors, Masters, or Doctorate")
+    )
+    ```
+* **Country Rich %**:
+    ```dax
+    Country Rich % = 
+    DIVIDE(
+        CALCULATE(COUNT('adult data'[salary]), 'adult data'[salary] = ">50K"),
+        CALCULATE(COUNT('adult data'[salary]), ALL('adult data'[salary]))
+    )
+    ```
+* **Min Hours Rich %**:
+    ```dax
+    Min Hours Rich % = 
+    VAR MinHours = MIN('adult data'[hours-per-week])
+    RETURN
+    DIVIDE(
+        CALCULATE(COUNT('adult data'[salary]), 'adult data'[salary] = ">50K", 'adult data'[hours-per-week] = MinHours),
+        CALCULATE(COUNT('adult data'[salary]), 'adult data'[hours-per-week] = MinHours)
+    )
+    ```
+
 ## 🛠️ Skills & Tools
 * **Power BI**: Full dashboard design and data modeling.
 * **DAX**: Created custom measures for precise percentage calculations.
